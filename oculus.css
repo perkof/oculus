@@ -1,0 +1,31 @@
+.oculus-editor, .oculus-overlay
+{
+	width: 50%;
+	min-height: 100%;
+	float: left;
+}
+
+.oculus-overlay.full {
+	width: 100%;
+}
+
+.oculus-container {
+	overflow: hidden;
+}
+
+.oculus-hidden {
+	display: none;
+}
+
+.oculus-saveEdit
+{
+	font-weight:bold;
+	padding: 10px;
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.oculus-saveEdit:hover
+{
+	background-color: gray;
+}
