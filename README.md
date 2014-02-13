@@ -1,4 +1,4 @@
 oculus
 ======
 
-Markdown WYSWIG editor
+Markdown editor
