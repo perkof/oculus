@@ -1,5 +1,6 @@
 (function(doc){
 	var Oculus, Markdown, Utils = {};
+	var Variables = [];
 
 	// Util.Shift taken from Pen: https://github.com/sofish/pen/
 	Utils.shift = function(key, fn, time) {
@@ -28,23 +29,27 @@
 
 		Markdown = new Showdown.converter({});
 
-		var elementName = config.elementName;
-		var element = doc.getElementById(elementName);
+		Variables.elementName = config.elementName;
+		Variables.element = doc.getElementById(Variables.elementName);
 
-		var container = this.setupContainer(element);
-		var overlay = doc.getElementById(config.elementName + '-oculus-overlay'); 
-		var button = doc.getElementById(config.elementName + '-oculus-saveEdit'); 
+		var container = this.setupContainer(Variables.element);
+		Variables.overlay = doc.getElementById(config.elementName + '-oculus-overlay'); 
+		Variables.button = doc.getElementById(config.elementName + '-oculus-saveEdit'); 
 
-		this.refreshOverlay(element, overlay);
+		this.refreshOverlay(Variables.element, Variables.overlay);
 
 		var that = this;
-		button.addEventListener('mouseup', function(e) {
-			that.toggleEditor(element, overlay, button);
+		Variables.button.addEventListener('mouseup', function(e) {
+			that.toggleEditor(Variables.element, Variables.overlay, Variables.button);
 		});
 
-		element.addEventListener('keyup', function(e) {
-			Utils.shift('refresh-overlay', function() { that.refreshOverlay(element, overlay)}, 200);
+		Variables.element.addEventListener('keyup', function(e) {
+			Utils.shift('refresh-overlay', function() { that.refreshOverlay(Variables.element, Variables.overlay)}, 200);
 		});
+	};
+
+	Oculus.prototype.triggerRefresh = function() {
+		this.refreshOverlay(Variables.element, Variables.overlay);
 	};
 
 	Oculus.prototype.setupContainer = function(element) {
